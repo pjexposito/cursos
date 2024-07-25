@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="back-to-menu">
+        <a href="/">Volver a la pantalla principal</a>
+      </div>
+    <div class="lessons">
+        <div class="title">{{ curso.titulo }}</div>
+        {% for leccion in lecciones %}
+        <a href="{% url 'detalle_leccion' pk=leccion.pk %}" class="lesson" title="Lesson 1 details.">
+            <img src="{{ leccion.imagen.url }}" alt="{{leccion.titulo}}" />
+            <div class="lesson-info">
+                <div class="lesson-title">{{leccion.titulo}}</div>
+                <div class="lesson-subtext">10 min</div>
+            </div>
+        </a>
+
+        {% endfor %}
+
+    </div>
+{% endblock %}

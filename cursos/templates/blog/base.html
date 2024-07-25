@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Formación ECI</title>
+        <link rel="stylesheet" href="{% static 'css/curso.css' %}">
+        <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="icon menu-icon" style="background-image: url('{% static 'menu.png' %}');"></div>
+                <div class="icon user-icon" style="background-image: url('{% static 'usuario.png' %}');"></div>
+    
+            </div>
+
+                {% block content %}
+                {% endblock %}
+
+        </div>
+    </div>
+    </body>
+    
+</html>
