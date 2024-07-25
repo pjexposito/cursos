@@ -1,55 +1,217 @@
-h1 a, h2 a {
-    color: #FCA205;
-    font-family: sans-serif ;
-}
-
+/* Global Styles */
 body {
-    padding-left: 15px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
 }
 
-.page-header {
-    background-color: #C25100;
-    margin-top: 0;
-    padding: 20px 20px 20px 40px;
+/* Container */
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header .icon {
+    width: 32px;
+    height: 32px;
+    background-color: #ddd;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+
+/* Title */
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Courses */
+.courses .course {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.course a {
+    text-decoration: none; 
+}
+
+.course:hover {
+    background-color: #ccc;
+}
+
+.course img {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.course-info {
+    flex-grow: 1;
+}
+
+.course-info .course-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2d2d2d;
+    margin-bottom: 5px;
+}
+
+.course-info a {
+    color: #2d2d2d; /* Gris oscuro */
+    text-decoration: none; /* Sin subrayado */
+}
+
+.course-info a:visited {
+    color: #2d2d2d; /* Mantener el gris oscuro después de visitar */
+}
+
+.course-info a:hover {
+    color: #727272; /* Mantener el gris oscuro en hover */
+}
+
+.course-info .course-lessons {
+    font-size: 14px;
+}
+
+.course .rating {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4a90e2;
     color: #ffffff;
-    font-size: 36pt;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.course .rating:hover {
+    background-color: #357abd;
+}
+
+/* Lessons */
+.lessons .lesson {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #e5e5e5;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
     text-decoration: none;
+    color: inherit;
 }
 
-.content {
-    margin-left: 40px;
+.lesson:hover {
+    background-color: #9f9e9e;
 }
 
-h1, h2, h3, h4 {
-    font-family: sans-serif, cursive;
+.lesson img {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    margin-right: 10px;
 }
 
-.date {
-    color: #828282;
+.lesson-info {
+    flex-grow: 1;
 }
 
-.save {
-    float: right;
+.lesson-info .lesson-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-.post-form textarea, .post-form input {
-    width: 100%;
+.lesson-info .lesson-subtext {
+    font-size: 14px;
+    color: #888;
 }
 
-.top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    margin-right: 20px;
+.back-to-menu {
+    display: block; /* Asegura que el marco ocupe todo el ancho */
+    margin-bottom: 20px; /* Espacio debajo del enlace */
+    padding: 8px 12px; /* Espacio dentro del rectángulo */
+    text-align: center;
+    background-color: #f5f5f5; /* Color de fondo suave */
+    color: #333; /* Color del texto oscuro */
+    font-size: 14px; /* Tamaño de la fuente */
+    font-weight: normal; /* Peso de fuente normal */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 8px; /* Bordes redondeados */
+    border: 1px solid #ddd; /* Borde del rectángulo */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición para el hover */
+    cursor: pointer; /* Cursor tipo puntero */
+    width: fit-content; /* Ajustar el ancho al contenido */
+    margin-left: auto; /* Centramos horizontalmente */
+    margin-right: auto; /* Centramos horizontalmente */
+}
+
+.back-to-menu a {
+    display: block; /* Hace que el enlace ocupe todo el área del contenedor */
+    padding: inherit; /* Hereda el padding del contenedor */
+    color: inherit; /* Hereda el color del contenedor */
+    text-decoration: none; /* Sin subrayado */
+}
+
+.back-to-menu a {
+    text-decoration: none; 
+    color: #000;
+}
+
+.back-to-menu a:hover {
+    text-decoration: none; 
+    color: #505050;
+}
+
+.back-to-menu:hover {
+    background-color: #e0e0e0; /* Color de fondo en hover */
+    color: #d5d5d5; /* Color del texto en hover */
 }
 
 .post {
-    margin-bottom: 70px;
+    font-size: 16px; /* Tamaño de la fuente aumentado */
+    line-height: 1.6; /* Interlineado mejorado */
+    color: #2d2d2d; /* Color de texto gris oscuro */
+    padding: 10px; /* Espacio interno para separar el texto del borde */
+    margin: 0 auto; /* Centrado automático */
+    max-width: 360px; /* Ancho máximo reducido para mejor legibilidad */
+    background-color: #f3f2f2; /* Color de fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra similar a otros elementos */
 }
 
-.post h2 a, .post h2 a:visited {
-    color: #000000;
+.post ul {
+    padding-left: 20px; /* Espacio a la izquierda para las listas */
+}
+
+.post li {
+    margin-bottom: 10px; /* Espacio entre los elementos de la lista */
+}
+
+.post h2 {
+    font-size: 24px; /* Tamaño de la fuente del título */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    color: #2d2d2d; /* Color del título */
 }
