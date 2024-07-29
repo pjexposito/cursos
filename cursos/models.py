@@ -11,7 +11,12 @@ class Leccion(models.Model):
     puntos = models.SmallIntegerField()
     ejercicio = models.ForeignKey('Ejercicio', on_delete=models.CASCADE, blank=True, null=True)
     curso = models.ForeignKey('Curso', on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to='images/')
+    miniatura = models.ImageField(upload_to='images/miniaturas/')
+    imagen1 = models.ImageField(upload_to='images/lecciones/')
+    imagen2 = models.ImageField(upload_to='images/lecciones/')
+    imagen3 = models.ImageField(upload_to='images/lecciones/')
+    imagen4 = models.ImageField(upload_to='images/lecciones/')
+    imagen5 = models.ImageField(upload_to='images/lecciones/')
 
     def publicar(self):
         self.fecha_creacion = timezone.now()
@@ -25,7 +30,8 @@ class Curso(models.Model):
     explicacion = models.TextField()
     fecha_creacion = models.DateTimeField(default=timezone.now)
     puntos = models.SmallIntegerField()
-    imagen = models.ImageField(upload_to='images/')
+    miniatura = models.ImageField(upload_to='images/miniaturas/')
+
 
     def publicar(self):
         self.fecha_creacion = timezone.now()
