@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-
+from django.utils.html import mark_safe
 
 class Leccion(models.Model):
     titulo = models.CharField(max_length=200)
@@ -17,6 +17,18 @@ class Leccion(models.Model):
     imagen3 = models.ImageField(upload_to='images/lecciones/')
     imagen4 = models.ImageField(upload_to='images/lecciones/')
     imagen5 = models.ImageField(upload_to='images/lecciones/')
+
+    @property
+    def contenido_con_imagenes(self):
+        contenido_actualizado = self.contenido
+        for i in range(1, 6):
+            imagen = getattr(self, f'imagen{i}')
+            if imagen:
+                valor = f'<img src="{imagen.url}" alt="imagen{i}" />'
+            else:
+                valor = ''
+            contenido_actualizado = contenido_actualizado.replace(f'** imagen{i} **', valor)
+        return mark_safe(contenido_actualizado)
 
     def publicar(self):
         self.fecha_creacion = timezone.now()

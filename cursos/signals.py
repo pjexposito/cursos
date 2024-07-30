@@ -1,17 +1,18 @@
 # signals.py
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import Leccion
+from .models import Leccion, Curso
 from PIL import Image
 import os
 
+@receiver(post_save, sender=Curso)
 @receiver(post_save, sender=Leccion)
 def redimensionar_y_recortar_imagen(sender, instance, **kwargs):
     print("Señal recibida para el modelo Curso")
     try:
-        if instance.imagen:
-            print(f"Procesando imagen: {instance.imagen.path}")
-            imagen_path = instance.imagen.path
+        if instance.miniatura:
+            print(f"Procesando imagen: {instance.miniatura.path}")
+            imagen_path = instance.miniatura.path
             imagen = Image.open(imagen_path)
             
             # Obtener dimensiones originales

@@ -7,7 +7,7 @@
 <div class="courses">
     {% for curso, conteo_lecciones in lecciones_por_curso %}
         <div class="course">
-            <img src="{{ curso.imagen.url }}" alt="imagen" />
+            <img src="{{ curso.miniatura.url }}" alt="imagen" />
             <div class="course-info">
                 <div class="course-title"> <a href="{% url 'detalle_curso' pk=curso.pk %}" title='{{ curso.explicacion|linebreaksbr }}'>{{ curso.titulo }}</a></div>
                 <div class="course-lessons">{{ conteo_lecciones }} lecciones</div>
