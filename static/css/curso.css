@@ -149,6 +149,8 @@ body {
     color: #888;
 }
 
+
+
 .back-to-menu {
     display: block; /* Asegura que el marco ocupe todo el ancho */
     margin-bottom: 20px; /* Espacio debajo del enlace */
@@ -214,4 +216,14 @@ body {
     font-size: 24px; /* Tamaño de la fuente del título */
     margin-bottom: 20px; /* Espacio debajo del título */
     color: #2d2d2d; /* Color del título */
+}
+
+
+.post img {
+    max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Elimina el espacio inferior causado por las imágenes en línea */
+    margin: 10px 0; /* Espacio arriba y abajo de las imágenes */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade un efecto de sombra */
+    border-radius: 5px; /* Bordes redondeados para las imágenes */
 }
