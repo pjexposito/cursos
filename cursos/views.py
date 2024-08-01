@@ -12,14 +12,14 @@ def lista_cursos(request):
     # Calcular el total de lecciones
     total_lecciones = sum(conteo for _, conteo in lecciones_por_curso)
 
-    return render(request, 'blog/lista_cursos.html', {'lecciones_por_curso': lecciones_por_curso, 'total_lecciones': total_lecciones})
+    return render(request, 'cursos/lista_cursos.html', {'lecciones_por_curso': lecciones_por_curso, 'total_lecciones': total_lecciones})
 
 def detalle_curso(request, pk):
     curso = get_object_or_404(Curso, pk=pk)
     lecciones = Leccion.objects.filter(curso_id=pk)
-    return render(request, 'blog/detalle_curso.html', {'curso': curso, 'lecciones':lecciones})
+    return render(request, 'cursos/detalle_curso.html', {'curso': curso, 'lecciones':lecciones})
 
 def detalle_leccion(request, pk):
     leccion = get_object_or_404(Leccion, pk=pk)
     curso = get_object_or_404(Curso, id=leccion.curso_id)
-    return render(request, 'blog/detalle_leccion.html', {'leccion': leccion, 'curso': curso})
+    return render(request, 'cursos/detalle_leccion.html', {'leccion': leccion, 'curso': curso})

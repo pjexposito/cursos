@@ -7,4 +7,3 @@ class CursosConfig(AppConfig):
 
     def ready(self):
         import cursos.signals
-        print('Señales cargadas')
