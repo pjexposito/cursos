@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.html import mark_safe
+from django.contrib.auth.models import User
 
 class Leccion(models.Model):
     titulo = models.CharField(max_length=200)
@@ -76,3 +77,12 @@ class Autor(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+class UsuarioLeccion(models.Model):
+    usuario = models.ForeignKey(User, related_name='lecciones_completadas', on_delete=models.CASCADE)
+    leccion = models.ForeignKey(Leccion, related_name='usuarios_completaron', on_delete=models.CASCADE)
+    completada = models.BooleanField(default=False)
+    fecha_completada = models.DateField(null=True, blank=True)
+    
+    def __str__(self):
+        return f'{self.usuario.username} - {self.leccion.titulo}'

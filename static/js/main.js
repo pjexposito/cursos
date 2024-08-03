@@ -10,12 +10,19 @@ function showInfoBox(message) {
 document.addEventListener("DOMContentLoaded", function() {
     var startTime = Date.now();
 
+
     var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
+
+                url = entry.target.getAttribute("data");
                 var timeElapsed = Date.now() - startTime;
                 if (timeElapsed >= 5000) {  // 15000 ms = 15 segundos
                     showInfoBox(`Has alcanzado el final del curso`);
+                    fetch(url, {
+                        method: 'GET',
+                        credentials: 'same-origin'
+                    })
                     if ("vibrate" in navigator) {
                         navigator.vibrate([200, 100, 200]);  // Vibrar con un patrón: vibrar 200ms, parar 100ms, vibrar 200ms
                     }

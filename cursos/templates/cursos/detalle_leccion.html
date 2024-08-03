@@ -7,5 +7,6 @@
         {{ leccion.contenido_con_imagenes|safe|linebreaksbr }}
 
     </div>
-    <div id="final-marker"></div> <!-- Marcador al final del contenido -->
+    <div id="final-marker" data="{% url 'marcar_leccion_completada' leccion.id %}"></div> <!-- Marcador al final del contenido -->
+    <a href="{% url 'marcar_leccion_completada' leccion.id %}">Marcar como completada</a>
 {% endblock %}

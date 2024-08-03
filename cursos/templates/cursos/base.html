@@ -15,6 +15,18 @@
                 <div class="icon user-icon" style="background-image: url('{% static 'usuario.png' %}');"> {{ user.username }}</div>
     
             </div>
+            <div class="page-header">
+                {% if user.is_authenticated %}
+                    <p class="top-menu">Hola {{ user.username }}</p>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+                {% endif %}
+            </div>
+            
 
                 {% block content %}
                 {% endblock %}
