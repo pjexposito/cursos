@@ -29,6 +29,9 @@ class Leccion(models.Model):
             else:
                 valor = ''
             contenido_actualizado = contenido_actualizado.replace(f'** imagen{i} **', valor)
+            contenido_actualizado = contenido_actualizado.replace('** texto oculto **', f'<span id="moreText">')
+            contenido_actualizado = contenido_actualizado.replace('** fin texto oculto **', f'</span><a href="#" id="toggleButton">Mostrar más</a>')
+
         return mark_safe(contenido_actualizado)
 
     def publicar(self):

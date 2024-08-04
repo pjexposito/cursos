@@ -7,6 +7,8 @@ function showInfoBox(message) {
     }, 5000); // 5000ms = 5 segundos
 }
 
+
+
 document.addEventListener("DOMContentLoaded", function() {
     var startTime = Date.now();
 
@@ -45,4 +47,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var marker = document.getElementById("final-marker");
     observer.observe(marker);
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    var moreText = document.getElementById("moreText");
+    var button = document.getElementById("toggleButton");
+
+    button.addEventListener("click", function() {
+        if (moreText.style.maxHeight === "0px" || moreText.style.maxHeight === "") {
+            moreText.style.maxHeight = "1800px"; // Ajusta esto según la cantidad de texto que desees mostrar
+            button.innerHTML = "Mostrar menos";
+        } else {
+            moreText.style.maxHeight = "0px";
+            button.innerHTML = "Mostrar más";
+        }
+    });
 });

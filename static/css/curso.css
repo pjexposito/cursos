@@ -247,3 +247,26 @@ body {
     visibility: visible;
     opacity: 1;
 }
+
+
+#moreText {
+    max-height: 0;
+    overflow: hidden;
+    display: inline-block;
+
+    transition: max-height 1s ease-out;
+    vertical-align: top; /* Asegura que el texto adicional se alinee correctamente */
+}
+
+.show-more {
+    max-height: 1800px; /* Ajusta esto según la cantidad de texto que desees mostrar */
+}
+
+
+#toggleButton {
+    text-decoration: none; 
+    border-radius: 10px;
+    background-color: #929292;
+    padding: 5px 10px;
+    color: #000;
+}
