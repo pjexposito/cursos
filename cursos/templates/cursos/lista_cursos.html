@@ -3,6 +3,10 @@
 {% extends 'cursos/base.html' %}
 {% load static %}
 {% block content %}
+
+{% comment %} 
+
+
 <div class="title"><a href="/">Formación</a></div>
 <div class="courses">
     {% for curso, conteo_lecciones in lecciones_por_curso %}
@@ -18,4 +22,38 @@
         </div>
     {% endfor %}
     </div>
+
+{% endcomment %} 
+
+<section class="course-categories">
+    <div class="titulo">
+        <h2><a href="/">Formación</a></h2>
+    </div>
+    <div class="categories-grid">
+
+{% for curso, conteo_lecciones in lecciones_por_curso %}
+
+
+<div class="category-item">
+    <div class="category-image">
+        <img src="{{ curso.miniatura.url }}" alt="Imagen del curso">
+    </div>
+    <div class="category-content">
+        <h3><a href="{% url 'detalle_curso' pk=curso.pk %}" title='{{ curso.explicacion|linebreaksbr }}'>{{ curso.titulo }}</a></h3>
+        <p>{{ curso.miniexplicacion|linebreaksbr }}</p>
+        <div class="category-meta">
+            <span>{{ conteo_lecciones }} lecciones</span>
+            <span>🎓 12/15</span>
+            <span>⏱️ 60+</span>
+        </div>
+    </div>
+
+</div>
+
+{% endfor %}
+
+
+</div>
+</section>
+
 {% endblock %}           

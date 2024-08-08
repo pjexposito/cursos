@@ -2,10 +2,42 @@
 {% load custom_filters %}
 {% load static %}
 {% block content %}
-
+<section class="course-categories">
+    <h2>{{ curso.titulo }}</h2>
     <div class="back-to-menu">
         <a href="/">Volver a la pantalla principal</a>
       </div>
+    <div class="categories-grid">
+
+
+      {% for leccion in lecciones %}
+
+      <div class="category-item">
+        <div class="category-image">
+            <img src="{{ leccion.miniatura.url }}" alt="imagen" />
+        </div>
+        <div class="category-content">
+            <h3><a href="{% url 'detalle_leccion' pk=leccion.pk %}" title='{{leccion.titulo}}'>{{leccion.titulo}}</a></h3>
+            <div class="category-meta">
+                <span>
+                {% if lecciones_completadas|default_if_none:""|get_item:leccion.id %}
+                    <div class="lesson-subtext">Leccion completada</div>
+                {% else %}
+                    <div class="lesson-subtext">Lección pendiente</div>    
+                {% endif %}
+                </span>
+                <span>1500 puntos</span>
+                <span>⏱️ 10 min.</span>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+
+
+            </div>
+        </section>
+{% comment %} 
     <div class="lessons">
         <div class="title">{{ curso.titulo }}</div>
         {% for leccion in lecciones %}
@@ -24,4 +56,8 @@
         {% endfor %}
 
     </div>
+
+
+ {% endcomment %} 
+   
 {% endblock %}

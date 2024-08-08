@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 
 class Leccion(models.Model):
     titulo = models.CharField(max_length=200)
+    explicacion = models.TextField()
+
     autor = models.ForeignKey('Autor', on_delete=models.CASCADE)
     fecha_creacion = models.DateTimeField(default=timezone.now)
     contenido = models.TextField()
@@ -44,6 +46,8 @@ class Leccion(models.Model):
 class Curso(models.Model):
     titulo = models.CharField(max_length=200)
     explicacion = models.TextField()
+    miniexplicacion = models.TextField()
+
     fecha_creacion = models.DateTimeField(default=timezone.now)
     puntos = models.SmallIntegerField()
     miniatura = models.ImageField(upload_to='images/miniaturas/')

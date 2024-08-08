@@ -1,0 +1,16 @@
+from django.core.management.base import BaseCommand
+from cursos.models import Leccion
+
+def format_title(title):
+    title = title.lower().capitalize()
+    return title
+
+class Command(BaseCommand):
+    help = 'Actualiza los títulos de Leccion'
+
+    def handle(self, *args, **kwargs):
+        items = Leccion.objects.all()
+        for item in items:
+            item.titulo = format_title(item.titulo)
+            item.save()
+        self.stdout.write(self.style.SUCCESS('Títulos actualizados exitosamente.'))

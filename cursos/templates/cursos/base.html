@@ -9,7 +9,8 @@
         <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     </head>
     <body>
-        <div class="container">
+        {% comment %} 
+        <div>
             <div class="header">
                 <div class="icon menu-icon" style="background-image: url('{% static 'menu.png' %}');"></div>
                 <div class="icon user-icon" style="background-image: url('{% static 'usuario.png' %}');"> {{ user.username }}</div>
@@ -26,13 +27,21 @@
                     <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
                 {% endif %}
             </div>
-            
+        {% endcomment %}    
+
+
 
                 {% block content %}
                 {% endblock %}
 
+
+
+    {% comment %} 
+            
         </div>
     </div>
+
+    {% endcomment %}    
     <div id="info-box" class="hidden">Cuadro informativo</div>
     <script src="{% static 'js/main.js' %}"></script>
     </body>
