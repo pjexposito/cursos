@@ -82,19 +82,35 @@ body {
 
 .category-content {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Asegura que el contenido ocupe todo el contenedor */
 }
 
 .category-content h3 {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem); /* Tamaño dinámico del título */
     color: #35424a;
     margin-bottom: 10px;
     margin-top: 5px;
+    flex: 0 1 30%; /* El título ocupará un 30% del contenedor */
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+    max-height: 30%; /* Evita que el título crezca demasiado */
 }
 
 .category-content p {
-    font-size: 1rem;
+    font-size: clamp(1.2rem, 2vw, 1.2rem); /* Tamaño dinámico del título */
     color: #666;
     margin-bottom: 15px;
+    flex: 1 1 50%; /* La descripción ocupará un 50% del contenedor */
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+    line-height: 1.2; /* Reduce el interlineado para ahorrar espacio */
+    max-height: 50%; /* Limita el crecimiento de la descripción */
 }
 
 .category-meta {
@@ -102,7 +118,14 @@ body {
     gap: 10px;
     font-size: 0.9rem;
     color: #888;
+    flex: 0 1 20%; /* Meta ocupará un 20% del contenedor */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+    margin-top: auto; /* Empuja el contenido meta al fondo */
+    max-height: 20%; /* Limita el crecimiento de este bloque */
 }
+
 
 .category-meta span {
     display: flex;
