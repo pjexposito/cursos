@@ -1,154 +1,157 @@
 /* Global Styles */
-body {
+body, h1, h2, p, ul {
     margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    line-height: 1.2;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-/* Container */
-.container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Sección de Course Categories */
+.course-categories {
+    padding: 40px 20px;
+    background-color: #f8f8f8;
+    text-align: center;
 }
 
-/* Header */
-.header {
+.course-categories h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #35424a;
+}
+
+/* Grid responsivo */
+.categories-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    margin-top: 5px;
+}
+
+.titulo a {
+    color: #35424a; /* Color principal del enlace */
+    text-decoration: none; /* Elimina el subrayado por defecto */
+    font-weight: bold; /* Hace que el texto del enlace sea más grueso */
+    border-bottom: 2px solid transparent; /* Añade un borde inferior invisible para el efecto hover */
+    transition: color 0.3s ease, border-bottom-color 0.3s ease; /* Transición suave */
+}
+
+.titulo a:hover {
+    color: #505050; /* Cambio de color en hover */
+    border-bottom-color: #505050; /* Muestra el borde inferior al hacer hover */
+}
+
+/* Componente de Categoría */
+
+
+.category-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
 }
 
-.header .icon {
-    width: 32px;
-    height: 32px;
-    background-color: #ddd;
-    border-radius: 50%;
-    background-size: cover;
+.category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 
-/* Title */
-.title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+
+.category-item a {
+    color: #35424a; /* Color principal del enlace */
+    text-decoration: none; /* Elimina el subrayado por defecto */
+    font-weight: bold; /* Hace que el texto del enlace sea más grueso */
+    border-bottom: 2px solid transparent; /* Añade un borde inferior invisible para el efecto hover */
+    transition: color 0.3s ease, border-bottom-color 0.3s ease; /* Transición suave */
 }
 
-/* Courses */
-.courses .course {
-    position: relative;
+.category-item a:hover {
+    color: #505050; /* Cambio de color en hover */
+    border-bottom-color: #505050; /* Muestra el borde inferior al hacer hover */
+}
+
+.category-content {
+    padding: 20px;
     display: flex;
-    align-items: center;
-    padding: 10px;
+    flex-direction: column;
+    height: 100%; /* Asegura que el contenido ocupe todo el contenedor */
+}
+
+.category-content h3 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem); /* Tamaño dinámico del título */
+    color: #35424a;
     margin-bottom: 10px;
-    background-color: #eee;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-}
-
-.course a {
-    text-decoration: none; 
-}
-
-.course:hover {
-    background-color: #ccc;
-}
-
-.course img {
-    width: 64px;
-    height: 64px;
-    border-radius: 10px;
-    margin-right: 10px;
-}
-
-.course-info {
-    flex-grow: 1;
-}
-
-.course-info .course-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #2d2d2d;
-    margin-bottom: 5px;
-}
-
-.course-info a {
-    color: #2d2d2d; /* Gris oscuro */
-    text-decoration: none; /* Sin subrayado */
-}
-
-.course-info a:visited {
-    color: #2d2d2d; /* Mantener el gris oscuro después de visitar */
-}
-
-.course-info a:hover {
-    color: #727272; /* Mantener el gris oscuro en hover */
-}
-
-.course-info .course-lessons {
-    font-size: 14px;
-}
-
-.course .rating {
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #4a90e2;
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.course .rating:hover {
-    background-color: #357abd;
-}
-
-/* Lessons */
-.lessons .lesson {
+    margin-top: 5px;
+    flex: 0 1 30%; /* El título ocupará un 30% del contenedor */
     display: flex;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #e5e5e5;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+    max-height: 30%; /* Evita que el título crezca demasiado */
 }
 
-.lesson:hover {
-    background-color: #9f9e9e;
+.category-content p {
+    font-size: clamp(1rem, 2vw, 1.2rem); /* Tamaño dinámico del título */
+    color: #666;
+    margin-bottom: 15px;
+    flex: 1 1 50%; /* La descripción ocupará un 50% del contenedor */
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+    line-height: 1.2; /* Reduce el interlineado para ahorrar espacio */
+    max-height: 50%; /* Limita el crecimiento de la descripción */
 }
 
-.lesson img {
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    margin-right: 10px;
-}
-
-.lesson-info {
-    flex-grow: 1;
-}
-
-.lesson-info .lesson-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.lesson-info .lesson-subtext {
-    font-size: 14px;
+.category-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 0.9rem;
     color: #888;
+    flex: 0 1 20%; /* Meta ocupará un 20% del contenedor */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+    margin-top: auto; /* Empuja el contenido meta al fondo */
+    max-height: 20%; /* Limita el crecimiento de este bloque */
 }
 
+
+.category-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Imagen en la parte inferior */
+.category-image {
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+    padding-top: 40%; /* Esto crea un espacio de 16:9 basado en el ancho */
+    position: relative; /* Necesario para que el elemento hijo absoluto se posicione correctamente */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se salga del contenedor */
+    background-color: #f8f8f8; /* Color de fondo, por si acaso la imagen no carga */
+
+}
+
+.category-image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen se recorte para llenar el contenedor, manteniendo el aspecto */
+    transform: translate(-50%, -50%); /* Centra la imagen */
+}
 
 
 .back-to-menu {
@@ -269,4 +272,105 @@ body {
     background-color: #929292;
     padding: 5px 10px;
     color: #000;
+}
+
+
+/* Botón de Menú (Hamburguesa) */
+.menu-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.menu-icon .bar {
+    width: 100%;
+    height: 4px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Menú Desplegable */
+.dropdown-menu {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 200px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-top: 1px solid #ddd; /* Opcional: línea horizontal separadora */
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.menu-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.menu-points {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.logout-link {
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s ease;
+}
+
+.logout-link:hover {
+    background-color: #e0e0e0;
+}
+
+/* Mostrar el Menú Desplegable */
+.show-menu {
+    display: flex;
+}
+
+@media (min-width: 768px) {
+    .post {
+        font-size: 18px; /* Tamaño de la fuente aumentado para pantallas más grandes */
+        line-height: 1.8; /* Interlineado mejorado */
+        max-width: 40%; /* Ancho máximo reducido en pantallas más grandes */
+        margin: 0 auto; /* Centrado automático */
+    }
+}
+
+/* Estilos para pantallas muy grandes */
+@media (min-width: 1200px) {
+    .post {
+        font-size: 20px; /* Tamaño de la fuente aún más grande */
+        line-height: 2; /* Interlineado aún mayor */
+    }
 }

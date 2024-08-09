@@ -1,10 +1,12 @@
 function showInfoBox(message) {
     const infoBox = document.getElementById('info-box');
-    infoBox.textContent = message;
-    infoBox.classList.add('show');
-    setTimeout(() => {
-        infoBox.classList.remove('show');
-    }, 5000); // 5000ms = 5 segundos
+    if (infoBox) {
+        infoBox.textContent = message;
+        infoBox.classList.add('show');
+        setTimeout(() => {
+            infoBox.classList.remove('show');
+        }, 5000); // 5000ms = 5 segundos
+    }
 }
 
 
@@ -46,20 +48,50 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     var marker = document.getElementById("final-marker");
-    observer.observe(marker);
+    if (marker) {
+        observer.observe(marker);
+    }
 });
 
 document.addEventListener("DOMContentLoaded", function() {
     var moreText = document.getElementById("moreText");
     var button = document.getElementById("toggleButton");
+    
+    if (button) {
+        button.addEventListener("click", function() {
+            if (moreText.style.maxHeight === "0px" || moreText.style.maxHeight === "") {
+                moreText.style.maxHeight = "1800px"; // Ajusta esto según la cantidad de texto que desees mostrar
+                button.innerHTML = "Mostrar menos";
+            } else {
+                moreText.style.maxHeight = "0px";
+                button.innerHTML = "Mostrar más";
+            }
+        });
+    }
+});
 
-    button.addEventListener("click", function() {
-        if (moreText.style.maxHeight === "0px" || moreText.style.maxHeight === "") {
-            moreText.style.maxHeight = "1800px"; // Ajusta esto según la cantidad de texto que desees mostrar
-            button.innerHTML = "Mostrar menos";
-        } else {
-            moreText.style.maxHeight = "0px";
-            button.innerHTML = "Mostrar más";
-        }
-    });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const menuIcon = document.getElementById('menuIcon');
+    if (menuIcon) {
+        menuIcon.addEventListener('click', function() {
+            const menu = document.getElementById('dropdownMenu');
+            if (menu) {
+                menu.classList.toggle('show-menu');
+            }
+        });
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const logoutLink = document.getElementById('logout-link');
+    const logoutForm = document.getElementById('logout-form');
+
+    if (logoutLink && logoutForm) {
+        logoutLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+            logoutForm.submit(); // Envía el formulario de cierre de sesión
+        });
+    }
 });
