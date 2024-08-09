@@ -101,7 +101,7 @@ body {
 }
 
 .category-content p {
-    font-size: clamp(1.2rem, 2vw, 1.2rem); /* Tamaño dinámico del título */
+    font-size: clamp(1rem, 2vw, 1.2rem); /* Tamaño dinámico del título */
     color: #666;
     margin-bottom: 15px;
     flex: 1 1 50%; /* La descripción ocupará un 50% del contenedor */
@@ -272,4 +272,105 @@ body {
     background-color: #929292;
     padding: 5px 10px;
     color: #000;
+}
+
+
+/* Botón de Menú (Hamburguesa) */
+.menu-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.menu-icon .bar {
+    width: 100%;
+    height: 4px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Menú Desplegable */
+.dropdown-menu {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 200px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-top: 1px solid #ddd; /* Opcional: línea horizontal separadora */
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.menu-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.menu-points {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.logout-link {
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s ease;
+}
+
+.logout-link:hover {
+    background-color: #e0e0e0;
+}
+
+/* Mostrar el Menú Desplegable */
+.show-menu {
+    display: flex;
+}
+
+@media (min-width: 768px) {
+    .post {
+        font-size: 18px; /* Tamaño de la fuente aumentado para pantallas más grandes */
+        line-height: 1.8; /* Interlineado mejorado */
+        max-width: 40%; /* Ancho máximo reducido en pantallas más grandes */
+        margin: 0 auto; /* Centrado automático */
+    }
+}
+
+/* Estilos para pantallas muy grandes */
+@media (min-width: 1200px) {
+    .post {
+        font-size: 20px; /* Tamaño de la fuente aún más grande */
+        line-height: 2; /* Interlineado aún mayor */
+    }
 }

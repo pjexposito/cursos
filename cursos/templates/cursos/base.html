@@ -9,6 +9,33 @@
         <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     </head>
     <body>
+
+    {% if user.is_authenticated %}
+
+            <!-- Botón de Menú -->
+            <div class="menu-icon" id="menuIcon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        
+            <!-- Menú Desplegable -->
+            <div class="dropdown-menu" id="dropdownMenu">
+                <div class="menu-header">
+                    <span class="menu-name">{{user.username}}</span>
+                    <span class="menu-points">11500 puntos</span>
+                </div>
+                <hr>
+                <a href="#" id="logout-link">Cerrar sesión</a>
+            </div>
+        
+
+            <form id="logout-form" method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+            </form>
+    {% endif %}
+
+
         {% comment %} 
         <div>
             <div class="header">
