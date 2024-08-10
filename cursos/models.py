@@ -16,11 +16,11 @@ class Leccion(models.Model):
     ejercicio = models.ForeignKey('Ejercicio', on_delete=models.CASCADE, blank=True, null=True)
     curso = models.ForeignKey('Curso', on_delete=models.CASCADE)
     miniatura = models.ImageField(upload_to='images/miniaturas/')
-    imagen1 = models.ImageField(upload_to='images/lecciones/')
-    imagen2 = models.ImageField(upload_to='images/lecciones/')
-    imagen3 = models.ImageField(upload_to='images/lecciones/')
-    imagen4 = models.ImageField(upload_to='images/lecciones/')
-    imagen5 = models.ImageField(upload_to='images/lecciones/')
+    imagen1 = models.ImageField(upload_to='images/lecciones/', blank=True, null=True)
+    imagen2 = models.ImageField(upload_to='images/lecciones/', blank=True, null=True)
+    imagen3 = models.ImageField(upload_to='images/lecciones/', blank=True, null=True)
+    imagen4 = models.ImageField(upload_to='images/lecciones/', blank=True, null=True)
+    imagen5 = models.ImageField(upload_to='images/lecciones/', blank=True, null=True)
 
     @property
     def contenido_con_imagenes(self):
