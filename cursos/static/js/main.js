@@ -72,6 +72,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    const expandible = document.querySelector('.expandible');
+    const contenido = document.querySelector('.contenido');
+    const simbolo = document.querySelector('.simbolo');
+    if (expandible) {
+        expandible.addEventListener('click', () => {
+            if (contenido.style.maxHeight) {
+                contenido.style.maxHeight = null;
+            } else {
+                contenido.style.maxHeight = contenido.scrollHeight + "px";
+            }
+            simbolo.classList.toggle('rotado');
+        });
+}
+});
+
+document.addEventListener("DOMContentLoaded", function() {
     const menuIcon = document.getElementById('menuIcon');
     if (menuIcon) {
         menuIcon.addEventListener('click', function() {

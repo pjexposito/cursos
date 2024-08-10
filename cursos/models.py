@@ -30,9 +30,11 @@ class Leccion(models.Model):
                 valor = f'<img src="{imagen.url}" alt="imagen{i}" />'
             else:
                 valor = ''
+                
+            texto_a_reemplazar = f'<div class="expandible"><span>Contenido oculto</span><span class="simbolo"></span></div><div class="contenido"><p>'
             contenido_actualizado = contenido_actualizado.replace(f'** imagen{i} **', valor)
-            contenido_actualizado = contenido_actualizado.replace('** texto oculto **', f'<span id="moreText">')
-            contenido_actualizado = contenido_actualizado.replace('** fin texto oculto **', f'</span><a href="#" id="toggleButton">Mostrar más</a>')
+            contenido_actualizado = contenido_actualizado.replace('** texto oculto **', texto_a_reemplazar)
+            contenido_actualizado = contenido_actualizado.replace('** fin texto oculto **', f'</p></div>')
 
         return mark_safe(contenido_actualizado)
 

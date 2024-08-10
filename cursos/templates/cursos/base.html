@@ -10,6 +10,8 @@
     </head>
     <body>
 
+
+
     {% if user.is_authenticated %}
 
             <!-- Botón de Menú -->
@@ -25,6 +27,12 @@
                     <span class="menu-name">{{user.username}}</span>
                     <span class="menu-points">11500 puntos</span>
                 </div>
+                {% if user.is_superuser %}
+                <hr>
+                <a href="/admin">Modificar base de datos</a>
+                {% endif %}
+
+
                 <hr>
                 <a href="#" id="logout-link">Cerrar sesión</a>
             </div>
