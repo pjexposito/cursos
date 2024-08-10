@@ -4,7 +4,7 @@
     <div class="back-to-menu"><a href="{% url 'detalle_curso' pk=curso.pk %}">Volver al índice del curso</a></div>
     <div class="post">
         <h2>{{ leccion.titulo }}</h2>
-        {{ leccion.contenido_con_imagenes|safe|linebreaksbr }}
+        {{ leccion.contenido_con_imagenes|safe|linebreaks }}
 
     </div>
     <div id="final-marker" data="{% url 'marcar_leccion_completada' leccion.id %}"></div> <!-- Marcador al final del contenido -->

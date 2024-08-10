@@ -15,7 +15,7 @@ def transformar_texto_oculto(texto):
         texto_oculto = contenido[1].strip()
         id_unico = uuid.uuid4().hex  # Generar un identificador único
 
-        return f'<div class="expandible" id="section{id_unico}">\n<span>{titular}</span>\n<span class="simbolo" id="symbol{id_unico}"></span></div>\n<div class="contenido" id="content{id_unico}">\n<p>{texto_oculto}</p>\n</div>'
+        return f'<div class="expandible" id="section{id_unico}"><span>{titular}</span><span class="simbolo" id="symbol{id_unico}"></span></div><div class="contenido" id="content{id_unico}"><p>{texto_oculto}</p></div>'
 
     # Reemplaza todos los bloques de texto oculto en el texto original
     texto_transformado = patron.sub(reemplazar_bloque, texto)

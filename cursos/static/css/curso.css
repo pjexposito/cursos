@@ -88,7 +88,7 @@ body {
 }
 
 .category-content h3 {
-    font-size: clamp(1.2rem, 3vw, 1.5rem); /* Tamaño dinámico del título */
+    font-size: clamp(1.2rem, 1.3vw, 1.2rem); /* Tamaño dinámico del título */
     color: #35424a;
     margin-bottom: 10px;
     margin-top: 5px;
@@ -101,7 +101,7 @@ body {
 }
 
 .category-content p {
-    font-size: clamp(1rem, 2vw, 1.2rem); /* Tamaño dinámico del título */
+    font-size: clamp(1rem, 1.1vw, 1rem); /* Tamaño dinámico del título */
     color: #666;
     margin-bottom: 15px;
     flex: 1 1 50%; /* La descripción ocupará un 50% del contenedor */
@@ -206,7 +206,9 @@ body {
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra similar a otros elementos */
 }
-
+.post p {
+    margin-bottom: 20px; /* Ajusta este valor según tus necesidades */
+}
 .post ul {
     padding-left: 20px; /* Espacio a la izquierda para las listas */
 }

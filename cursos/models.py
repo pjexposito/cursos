@@ -32,12 +32,9 @@ class Leccion(models.Model):
             else:
                 valor = ''
             
-            #texto_a_reemplazar = f'<div class="expandible"><span>Contenido oculto</span><span class="simbolo"></span></div><div class="contenido"><p>'
             contenido_actualizado = contenido_actualizado.replace(f'** imagen{i} **', valor)
-            #contenido_actualizado = contenido_actualizado.replace('** texto oculto **', texto_a_reemplazar)
-            #contenido_actualizado = contenido_actualizado.replace('** fin texto oculto **', f'</p></div>')
 
-        return mark_safe(transformar_texto_oculto(contenido_actualizado))
+        return transformar_texto_oculto(contenido_actualizado)
 
     def publicar(self):
         self.fecha_creacion = timezone.now()
