@@ -53,23 +53,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    var moreText = document.getElementById("moreText");
-    var button = document.getElementById("toggleButton");
-    
-    if (button) {
-        button.addEventListener("click", function() {
-            if (moreText.style.maxHeight === "0px" || moreText.style.maxHeight === "") {
-                moreText.style.maxHeight = "1800px"; // Ajusta esto según la cantidad de texto que desees mostrar
-                button.innerHTML = "Mostrar menos";
-            } else {
-                moreText.style.maxHeight = "0px";
-                button.innerHTML = "Mostrar más";
-            }
-        });
-    }
-});
-
 
 document.addEventListener("DOMContentLoaded", function() {
     const menuIcon = document.getElementById('menuIcon');
@@ -94,4 +77,32 @@ document.addEventListener('DOMContentLoaded', function() {
             logoutForm.submit(); // Envía el formulario de cierre de sesión
         });
     }
+});
+
+
+function toggleSection(sectionId, contentId, symbolId) {
+    var content = document.getElementById(contentId);
+    var symbol = document.getElementById(symbolId);
+
+    if (content.style.maxHeight) {
+        // If the section is currently expanded, collapse it
+        content.style.maxHeight = null;
+        content.style.display = "none";
+        symbol.classList.remove('rotado');
+    } else {
+        // Expand the section
+        content.style.display = "block";
+        content.style.maxHeight = content.scrollHeight + "px";
+        symbol.classList.add('rotado');
+    }
+}
+
+document.querySelectorAll('.expandible').forEach(function(button) {
+    var sectionId = button.id;
+    var contentId = 'content' + sectionId.replace('section', '');
+    var symbolId = 'symbol' + sectionId.replace('section', '');
+
+    button.addEventListener('click', function() {
+        toggleSection(sectionId, contentId, symbolId);
+    });
 });

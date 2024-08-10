@@ -374,3 +374,47 @@ body {
         line-height: 2; /* Interlineado aún mayor */
     }
 }
+
+
+.expandible {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+}
+
+.expandible:hover {
+    background-color: #e0e0e0;
+}
+
+.contenido {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 10px;
+    display: none; /* Hide by default */
+}
+
+.expandido .contenido {
+    display: block; /* Show content */
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.simbolo {
+    width: 12px;
+    height: 12px;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    transform: rotate(-45deg);
+    transition: transform 0.3s;
+}
+
+.rotado {
+    transform: rotate(135deg);
+}

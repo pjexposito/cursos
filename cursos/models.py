@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.html import mark_safe
 from django.contrib.auth.models import User
+from .utils import transformar_texto_oculto
 
 class Leccion(models.Model):
     titulo = models.CharField(max_length=200)
@@ -30,13 +31,13 @@ class Leccion(models.Model):
                 valor = f'<img src="{imagen.url}" alt="imagen{i}" />'
             else:
                 valor = ''
-                
-            texto_a_reemplazar = f'<div class="expandible"><span>Contenido oculto</span><span class="simbolo"></span></div><div class="contenido"><p>'
+            
+            #texto_a_reemplazar = f'<div class="expandible"><span>Contenido oculto</span><span class="simbolo"></span></div><div class="contenido"><p>'
             contenido_actualizado = contenido_actualizado.replace(f'** imagen{i} **', valor)
-            contenido_actualizado = contenido_actualizado.replace('** texto oculto **', texto_a_reemplazar)
-            contenido_actualizado = contenido_actualizado.replace('** fin texto oculto **', f'</p></div>')
+            #contenido_actualizado = contenido_actualizado.replace('** texto oculto **', texto_a_reemplazar)
+            #contenido_actualizado = contenido_actualizado.replace('** fin texto oculto **', f'</p></div>')
 
-        return mark_safe(contenido_actualizado)
+        return mark_safe(transformar_texto_oculto(contenido_actualizado))
 
     def publicar(self):
         self.fecha_creacion = timezone.now()
