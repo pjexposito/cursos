@@ -5,7 +5,7 @@ function showInfoBox(message) {
         infoBox.classList.add('show');
         setTimeout(() => {
             infoBox.classList.remove('show');
-        }, 5000); // 5000ms = 5 segundos
+        }, 10000); // 10000ms = 10 segundos
     }
 }
 
@@ -13,16 +13,18 @@ function showInfoBox(message) {
 
 document.addEventListener("DOMContentLoaded", function() {
     var startTime = Date.now();
-
-
+    
     var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
+            console.log("Intersección detectada:", entry);  // Esto mostrará si el marcador está siendo observado
             if (entry.isIntersecting) {
-
-                url = entry.target.getAttribute("data");
                 var timeElapsed = Date.now() - startTime;
-                if (timeElapsed >= 5000) {  // 15000 ms = 15 segundos
-
+                console.log(`Tiempo transcurrido: ${timeElapsed} ms`);
+                
+                if (timeElapsed >= 5000) {
+                    let url = entry.target.getAttribute("data");
+                    console.log(`URL a marcar como completada: ${url}`);
+                    
                     fetch(url, {
                         method: 'GET',
                         credentials: 'same-origin'
@@ -38,10 +40,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         console.error("Error:", error);
                     });
 
-
                     showInfoBox(`Has alcanzado el final del curso`);
-
-                    observer.unobserve(entry.target);  // Deja de observar después de la primera intersección y el tiempo transcurrido
+                    observer.unobserve(entry.target);
                 }
             }
         });
@@ -50,8 +50,12 @@ document.addEventListener("DOMContentLoaded", function() {
     var marker = document.getElementById("final-marker");
     if (marker) {
         observer.observe(marker);
+    } else {
+        console.log("Marcador no encontrado en el DOM.");
     }
 });
+
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
