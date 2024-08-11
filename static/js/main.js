@@ -1,11 +1,11 @@
-function showInfoBox(message) {
+function showInfoBox(message, tiempo) {
     const infoBox = document.getElementById('info-box');
     if (infoBox) {
         infoBox.textContent = message;
         infoBox.classList.add('show');
         setTimeout(() => {
             infoBox.classList.remove('show');
-        }, 10000); // 10000ms = 10 segundos
+        }, tiempo*1000); // 10000ms = 10 segundos
     }
 }
 
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         console.error("Error:", error);
                     });
 
-                    showInfoBox(`Has alcanzado el final del curso`);
+                    showInfoBox(`Has alcanzado el final del curso`,10);
                     observer.unobserve(entry.target);
                 }
             }
@@ -109,4 +109,33 @@ document.querySelectorAll('.expandible').forEach(function(button) {
     button.addEventListener('click', function() {
         toggleSection(sectionId, contentId, symbolId);
     });
+});
+
+let lastScrollTop = 0;
+let scrollTimeout;
+
+window.addEventListener('scroll', function() {
+    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Verifica si el usuario está haciendo scroll hacia abajo
+    if (currentScrollTop > lastScrollTop) {
+        // Detecta si el scroll es rápido
+        if (Math.abs(currentScrollTop - lastScrollTop) > 70) {
+            // Si hay un temporizador activo, cancélalo
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+
+            // Detén el scroll
+            document.body.style.overflow = 'hidden';
+            showInfoBox('Por favor, lee el curso con atención.',2)
+            // Establece un temporizador para reactivar el scroll después de 10 segundos
+            scrollTimeout = setTimeout(function() {
+                document.body.style.overflow = ''; // Restaura el comportamiento de scroll
+                console.log('Scroll reactivado.');
+            }, 1000);
+        }
+    }
+
+    lastScrollTop = currentScrollTop;
 });
