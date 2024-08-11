@@ -228,7 +228,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra similar a otros elementos */
 }
 .post p {
-    margin-bottom: 20px; /* Ajusta este valor según tus necesidades */
+    margin-bottom: 20px; /* Ajusta este valor según tus necesidades. Ahora es 20*/
 }
 .post ul {
     padding-left: 20px; /* Espacio a la izquierda para las listas */
