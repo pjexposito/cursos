@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.utils.html import mark_safe
 from django.contrib.auth.models import User
 from .utils import transformar_texto_oculto
+import markdown2
 
 class Leccion(models.Model):
     titulo = models.CharField(max_length=200)
@@ -33,8 +34,11 @@ class Leccion(models.Model):
                 valor = ''
             
             contenido_actualizado = contenido_actualizado.replace(f'** imagen{i} **', valor)
+        contenido_actualizado = transformar_texto_oculto(contenido_actualizado)
+        contenido_actualizado = markdown2.markdown(contenido_actualizado)
+        print(contenido_actualizado)
 
-        return transformar_texto_oculto(contenido_actualizado)
+        return contenido_actualizado
 
     def publicar(self):
         self.fecha_creacion = timezone.now()
