@@ -4,27 +4,6 @@
 {% load static %}
 {% block content %}
 
-{% comment %} 
-
-
-<div class="title"><a href="/">Formación</a></div>
-<div class="courses">
-    {% for curso, conteo_lecciones in lecciones_por_curso %}
-        <div class="course">
-            <img src="{{ curso.miniatura.url }}" alt="imagen" />
-            <div class="course-info">
-                <div class="course-title"> <a href="{% url 'detalle_curso' pk=curso.pk %}" title='{{ curso.explicacion|linebreaksbr }}'>{{ curso.titulo }}</a></div>
-                <div class="course-lessons">{{ conteo_lecciones }} lecciones</div>
-            </div>
-            <div class="rating">12/15</div>
-            {# <p>{{ curso.explicacion|linebreaksbr }}</p> #}
-
-        </div>
-    {% endfor %}
-    </div>
-
-{% endcomment %} 
-
 <section class="course-categories">
     <div class="titulo">
         <h2><a href="/">Formación</a></h2>

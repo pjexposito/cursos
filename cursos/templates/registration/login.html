@@ -1,8 +1,11 @@
 {% extends "cursos/base.html" %}
 
+
 {% block content %}
+    <div class="post">
+    <h3>Introduce la información de usuario:</h1>
     {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
+        <p>El nombre no es correcto. Prueba de nuevo.</p>
     {% endif %}
 
     <form method="post" action="{% url 'login' %}">
@@ -18,7 +21,8 @@
         </tr>
         </table>
 
-        <input type="submit" value="login" />
+        <input type="submit" value="Iniciar sesión" />
         <input type="hidden" name="next" value="{{ next }}" />
     </form>
+</div>
 {% endblock %}
