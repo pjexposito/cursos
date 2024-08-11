@@ -8,12 +8,23 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def lista_cursos(request):
     cursos = Curso.objects.filter(fecha_creacion__lte=timezone.now()).order_by('fecha_creacion')
-    # Inicializa un diccionario para almacenar el conteo de lecciones por curso
-    # Crear una lista de tuplas (curso, conteo de lecciones)
-    lecciones_por_curso = [(curso, curso.leccion_set.count()) for curso in cursos]
+    lecciones_por_curso = []
     
-    # Calcular el total de lecciones
-    total_lecciones = sum(conteo for _, conteo in lecciones_por_curso)
+    for curso in cursos:
+        # Contar el número de lecciones totales del curso
+        total_lecciones = curso.leccion_set.count()
+        
+        # Contar el número de lecciones completadas por el usuario
+        lecciones_completadas = UsuarioLeccion.objects.filter(usuario=request.user, leccion__curso=curso, completada=True).count()
+        
+        # Agregar una tupla al resultado con el curso, número de lecciones totales y lecciones completadas
+        lecciones_por_curso.append((curso, total_lecciones, lecciones_completadas))
+    
+        lecciones_por_curso.sort(key=lambda x: x[1] == x[2])  # Pone los completados al final
+        #Esta parte de arriba está hecha por ChatGPT. No entiendo como lo ha hecho. Investigar.
+    # Calcular el total de lecciones de todos los cursos
+    total_lecciones = sum(conteo for _, conteo, _ in lecciones_por_curso)
+
 
     return render(request, 'cursos/lista_cursos.html', {'lecciones_por_curso': lecciones_por_curso, 'total_lecciones': total_lecciones})
 

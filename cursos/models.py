@@ -47,7 +47,7 @@ class Curso(models.Model):
     titulo = models.CharField(max_length=200)
     explicacion = models.TextField()
     miniexplicacion = models.TextField()
-
+    duracion = models.PositiveIntegerField()  # Duración en minutos
     fecha_creacion = models.DateTimeField(default=timezone.now)
     puntos = models.SmallIntegerField()
     miniatura = models.ImageField(upload_to='images/miniaturas/')

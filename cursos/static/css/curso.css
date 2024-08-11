@@ -66,6 +66,27 @@ body {
 }
 
 
+.completed {
+    background-color: #e0e0e0; /* Color de fondo más tenue */
+    color: #aaa; /* Texto más tenue */
+}
+
+.completed .category-item a {
+    color: #888; /* Color de enlace más tenue */
+}
+
+.completed .category-meta {
+    color: #bbb; /* Color de los meta datos más tenue */
+}
+
+.completed .category-item:hover {
+    transform: none; /* Desactiva el efecto de hover */
+    box-shadow: none; /* Elimina la sombra */
+}
+
+.completed .category-image img {
+    filter: grayscale(100%) opacity(70%); /* Convierte la imagen a escala de grises y reduce la opacidad */
+}
 
 .category-item a {
     color: #35424a; /* Color principal del enlace */
@@ -240,12 +261,14 @@ body {
     transform: translateX(-50%);
     padding: 10px 20px;
     background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3); /* Sombra más grande y difusa */
     color: white;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 16px;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s, opacity 0.5s ease-in-out;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
 }
 
 #info-box.show {
