@@ -7,38 +7,28 @@ from .utils import transformar_texto_oculto
 import markdown2
 
 class Leccion(models.Model):
-    titulo = models.CharField(max_length=200)
-    explicacion = models.TextField()
+    titulo = models.CharField(max_length=100)
+    explicacion = models.CharField(max_length=400)
 
     autor = models.ForeignKey('Autor', on_delete=models.CASCADE)
-    fecha_creacion = models.DateTimeField(default=timezone.now)
+    fecha_creacion = models.DateField(default=timezone.now)
     contenido = models.TextField()
     puntos = models.SmallIntegerField()
-    ejercicio = models.ForeignKey('Ejercicio', on_delete=models.CASCADE, blank=True, null=True)
     curso = models.ForeignKey('Curso', on_delete=models.CASCADE)
     miniatura = models.ImageField(upload_to='images/miniaturas/')
-    imagen1 = models.ImageField(upload_to='images/lecciones/', blank=True, null=True)
-    imagen2 = models.ImageField(upload_to='images/lecciones/', blank=True, null=True)
-    imagen3 = models.ImageField(upload_to='images/lecciones/', blank=True, null=True)
-    imagen4 = models.ImageField(upload_to='images/lecciones/', blank=True, null=True)
-    imagen5 = models.ImageField(upload_to='images/lecciones/', blank=True, null=True)
+
 
     @property
     def contenido_con_imagenes(self):
         contenido_actualizado = self.contenido
-        for i in range(1, 6):
-            imagen = getattr(self, f'imagen{i}')
-            if imagen:
-                valor = f'<img src="{imagen.url}" alt="imagen{i}" />'
-            else:
-                valor = ''
-            
+        for i, imagen in enumerate(self.imagenes.all(), start=1):
+            valor = f'<img src="{imagen.imagen.url}" alt="imagen{i}" />'
             contenido_actualizado = contenido_actualizado.replace(f'** imagen{i} **', valor)
         contenido_actualizado = transformar_texto_oculto(contenido_actualizado)
         contenido_actualizado = markdown2.markdown(contenido_actualizado)
         print(contenido_actualizado)
 
-        return contenido_actualizado
+        return mark_safe(contenido_actualizado)  # Importante marcarlo como seguro si se va a renderizar en HTML
 
     def publicar(self):
         self.fecha_creacion = timezone.now()
@@ -48,11 +38,11 @@ class Leccion(models.Model):
         return self.titulo
     
 class Curso(models.Model):
-    titulo = models.CharField(max_length=200)
-    explicacion = models.TextField()
+    titulo = models.CharField(max_length=100)
+    explicacion = models.CharField(max_length=400)
     miniexplicacion = models.TextField()
     duracion = models.PositiveIntegerField()  # Duración en minutos
-    fecha_creacion = models.DateTimeField(default=timezone.now)
+    fecha_creacion = models.DateField(default=timezone.now)
     puntos = models.SmallIntegerField()
     miniatura = models.ImageField(upload_to='images/miniaturas/')
 
@@ -67,7 +57,7 @@ class Curso(models.Model):
 
 class Ejercicio(models.Model):
     titulo = models.CharField(max_length=200)
-    fecha_creacion = models.DateTimeField(default=timezone.now)
+    fecha_creacion = models.DateField(default=timezone.now)
     puntos = models.SmallIntegerField()
     oportunidades = models.SmallIntegerField()
     logica = models.TextField()
@@ -97,3 +87,7 @@ class UsuarioLeccion(models.Model):
     
     def __str__(self):
         return f'{self.usuario.username} - {self.leccion.titulo}'
+    
+class ImagenLeccion(models.Model):
+    leccion = models.ForeignKey(Leccion, related_name='imagenes', on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='images/lecciones/')

@@ -133,7 +133,7 @@ window.addEventListener('scroll', function() {
             scrollTimeout = setTimeout(function() {
                 document.body.style.overflow = ''; // Restaura el comportamiento de scroll
                 console.log('Scroll reactivado.');
-            }, 1000);
+            }, 2000);
         }
     }
 
