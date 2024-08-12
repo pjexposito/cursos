@@ -10,7 +10,7 @@
     </div>
     <div class="categories-grid">
 
-{% for curso, total_lecciones, lecciones_completadas in lecciones_por_curso %}
+{% for curso, total_lecciones, lecciones_completadas, total_puntos, total_puntos_obtenidos in lecciones_por_curso %}
 
 <div class="category-item {% if lecciones_completadas == total_lecciones %}completed{% endif %}">
     <div class="category-image">
@@ -21,9 +21,9 @@
         <p>{{ curso.miniexplicacion|linebreaksbr }}</p>
         <div class="category-meta">
             {% if lecciones_completadas == total_lecciones %}
-                <span>Curso completado</span>
+                <span>🏆 {{ total_puntos_obtenidos }}/{{ total_puntos }} puntos</span>
             {% else%}
-                <span>{{ total_lecciones  }} lecciones</span>
+                <span>🕹️ {{ total_puntos_obtenidos }}/{{ total_puntos }} puntos</span>
             {% endif %}
 
             <span>🎓 {{ lecciones_completadas }}/{{ total_lecciones  }}</span>

@@ -25,7 +25,7 @@
             <div class="dropdown-menu" id="dropdownMenu">
                 <div class="menu-header">
                     <span class="menu-name">{{user.username}}</span>
-                    <span class="menu-points">11500 puntos</span>
+                    <span class="menu-points">{{puntos_totales}} puntos</span>
                 </div>
                 {% if user.is_superuser %}
                 <hr>
@@ -43,40 +43,9 @@
             </form>
     {% endif %}
 
+    {% block content %}
+    {% endblock %}
 
-        {% comment %} 
-        <div>
-            <div class="header">
-                <div class="icon menu-icon" style="background-image: url('{% static 'menu.png' %}');"></div>
-                <div class="icon user-icon" style="background-image: url('{% static 'usuario.png' %}');"> {{ user.username }}</div>
-    
-            </div>
-            <div class="page-header">
-                {% if user.is_authenticated %}
-                    <p class="top-menu">Hola {{ user.username }}</p>
-                    <form method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button type="submit">logout</button>
-                    </form>
-                {% else %}
-                    <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
-                {% endif %}
-            </div>
-        {% endcomment %}    
-
-
-
-                {% block content %}
-                {% endblock %}
-
-
-
-    {% comment %} 
-            
-        </div>
-    </div>
-
-    {% endcomment %}    
     <div id="info-box" class="hidden">Cuadro informativo</div>
     <script src="{% static 'js/main.js' %}"></script>
     </body>

@@ -26,7 +26,6 @@ class Leccion(models.Model):
             contenido_actualizado = contenido_actualizado.replace(f'** imagen{i} **', valor)
         contenido_actualizado = transformar_texto_oculto(contenido_actualizado)
         contenido_actualizado = markdown2.markdown(contenido_actualizado)
-        print(contenido_actualizado)
 
         return mark_safe(contenido_actualizado)  # Importante marcarlo como seguro si se va a renderizar en HTML
 
@@ -84,7 +83,7 @@ class UsuarioLeccion(models.Model):
     leccion = models.ForeignKey(Leccion, related_name='usuarios_completaron', on_delete=models.CASCADE)
     completada = models.BooleanField(default=False)
     fecha_completada = models.DateField(null=True, blank=True)
-    
+    puntos_obtenidos = models.SmallIntegerField()
     def __str__(self):
         return f'{self.usuario.username} - {self.leccion.titulo}'
     

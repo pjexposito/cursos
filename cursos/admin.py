@@ -4,7 +4,7 @@ from .models import Leccion, Curso, Autor, Ejercicio, ImagenLeccion
 
 class ImagenLeccionInline(admin.TabularInline):
     model = ImagenLeccion
-    extra = 1  # Define cuántos campos en blanco se mostrarán para agregar nuevas imágenes
+    extra = 0  # Define cuántos campos en blanco se mostrarán para agregar nuevas imágenes
 
 class LeccionAdmin(admin.ModelAdmin):
     inlines = [ImagenLeccionInline]
@@ -13,7 +13,7 @@ admin.site.register(Leccion, LeccionAdmin)
 
 class LeccionInline(admin.StackedInline):
     model = Leccion
-    extra = 1  # Define cuántos campos en blanco se mostrarán para agregar nuevas lecciones
+    extra = 0  # Define cuántos campos en blanco se mostrarán para agregar nuevas lecciones
 
 class CursoAdmin(admin.ModelAdmin):
     inlines = [LeccionInline]

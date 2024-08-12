@@ -17,7 +17,6 @@ def redimensionar_y_recortar_imagen(sender, instance, **kwargs):
             
             # Obtener dimensiones originales
             ancho, alto = imagen.size
-            print(f"Dimensiones originales: {ancho}x{alto}")
 
             # Determinar el tamaño mínimo para recortar la imagen al centro
             min_dimension = min(ancho, alto)
@@ -30,15 +29,12 @@ def redimensionar_y_recortar_imagen(sender, instance, **kwargs):
 
             # Recortar la imagen
             imagen = imagen.crop((izquierda, superior, derecha, inferior))
-            print(f"Imagen recortada a: {min_dimension}x{min_dimension}")
 
             # Redimensionar la imagen a 512x512 px
             imagen = imagen.resize((512, 512), Image.LANCZOS)
-            print("Imagen redimensionada a 512x512")
 
             # Guardar la imagen
             imagen.save(imagen_path)
-            print("Imagen guardada")
 
 
     except Exception as e:

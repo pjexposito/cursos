@@ -21,13 +21,12 @@
             <div class="category-meta">
                 <span>
                 {% if lecciones_completadas|default_if_none:""|get_item:leccion.id %}
-                    <div class="lesson-subtext">Leccion completada</div>
+                    <div class="lesson-subtext">🏅 Leccion completada</div>
                 {% else %}
-                    <div class="lesson-subtext">Lección pendiente</div>    
+                    <div class="lesson-subtext">⏳ Lección pendiente</div>    
                 {% endif %}
                 </span>
-                <span>1500 puntos</span>
-                <span>⏱️ 10 min.</span>
+                <span>🕹️ {{ leccion.puntos }} puntos</span>
             </div>
         </div>
 
