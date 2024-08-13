@@ -90,3 +90,15 @@ class UsuarioLeccion(models.Model):
 class ImagenLeccion(models.Model):
     leccion = models.ForeignKey(Leccion, related_name='imagenes', on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='images/lecciones/')
+
+
+class Pregunta(models.Model):
+    pregunta_texto = models.CharField(max_length=255)
+    opciones = models.CharField(max_length=255)  # Opciones separadas por |
+    respuestas = models.CharField(max_length=255)  # Respuestas correctas separadas por |
+    
+    def opciones_lista(self):
+        return self.opciones.split('|')
+    
+    def respuestas_lista(self):
+        return self.respuestas.split('|')

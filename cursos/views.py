@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Curso, Leccion, UsuarioLeccion
+from .models import Curso, Leccion, UsuarioLeccion, Pregunta
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum  
+from .forms import PreguntaForm
 
 # Create your views here.
 
@@ -59,3 +60,28 @@ def marcar_leccion_completada(request, leccion_id):
         defaults={'completada': True, 'fecha_completada': timezone.now(), 'puntos_obtenidos': leccion.puntos}
     )
     return redirect('lista_cursos')
+
+def cuestionario_view(request):
+    preguntas = Pregunta.objects.all()
+    form = PreguntaForm(request.POST or None, preguntas=preguntas)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            resultados = []
+            for pregunta in preguntas:
+                campo_nombre = f'pregunta_{pregunta.id}'
+                respuestas = form.cleaned_data.get(campo_nombre)
+                respuestas_correctas = pregunta.respuestas_lista()
+                if isinstance(respuestas, list):
+                    if set(respuestas) == set(respuestas_correctas):
+                        resultados.append((pregunta.pregunta_texto, "Correcto"))
+                    else:
+                        resultados.append((pregunta.pregunta_texto, "Incorrecto"))
+                else:
+                    if respuestas in respuestas_correctas:
+                        resultados.append((pregunta.pregunta_texto, "Correcto"))
+                    else:
+                        resultados.append((pregunta.pregunta_texto, "Incorrecto"))
+            return render(request, 'resultado.html', {'resultados': resultados})
+    
+    return render(request, 'cuestionario.html', {'form': form})

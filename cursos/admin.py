@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Leccion, Curso, Autor, Ejercicio, ImagenLeccion
+from .models import Leccion, Curso, Autor, Ejercicio, ImagenLeccion, Pregunta
 
 
 class ImagenLeccionInline(admin.TabularInline):
@@ -24,3 +24,4 @@ admin.site.register(Curso, CursoAdmin)
 
 admin.site.register(Autor)
 admin.site.register(Ejercicio)
+admin.site.register(Pregunta)

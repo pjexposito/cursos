@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado del Cuestionario</title>
+</head>
+<body>
+    <h1>Resultado del Cuestionario</h1>
+    <ul>
+        {% for pregunta, resultado in resultados %}
+            <li>{{ pregunta }}: {{ resultado }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'cuestionario' %}">Volver al cuestionario</a>
+</body>
+</html>
