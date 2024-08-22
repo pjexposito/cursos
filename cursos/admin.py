@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Leccion, Curso, Autor, Ejercicio, ImagenLeccion, Pregunta
+from .models import Leccion, Curso, Autor, Ejercicio, ImagenLeccion, Pregunta, Cuestionario
 
 
 class ImagenLeccionInline(admin.TabularInline):
@@ -9,7 +9,6 @@ class ImagenLeccionInline(admin.TabularInline):
 class LeccionAdmin(admin.ModelAdmin):
     inlines = [ImagenLeccionInline]
 
-admin.site.register(Leccion, LeccionAdmin)
 
 class LeccionInline(admin.StackedInline):
     model = Leccion
@@ -18,10 +17,15 @@ class LeccionInline(admin.StackedInline):
 class CursoAdmin(admin.ModelAdmin):
     inlines = [LeccionInline]
 
+class PreguntaInline(admin.StackedInline):
+    model = Pregunta
+    extra = 0  # Define cuántos campos en blanco se mostrarán para agregar nuevas lecciones
+
+class CuestionarioAdmin(admin.ModelAdmin):
+    inlines = [PreguntaInline]
+
 admin.site.register(Curso, CursoAdmin)
-
-
-
+admin.site.register(Leccion, LeccionAdmin)
+admin.site.register(Cuestionario, CuestionarioAdmin)
 admin.site.register(Autor)
 admin.site.register(Ejercicio)
-admin.site.register(Pregunta)

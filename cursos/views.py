@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Curso, Leccion, UsuarioLeccion, Pregunta
+from .models import Curso, Leccion, UsuarioLeccion, Cuestionario
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum  
-from .forms import PreguntaForm
+from .forms import CuestionarioForm
 
 # Create your views here.
 
@@ -61,27 +61,37 @@ def marcar_leccion_completada(request, leccion_id):
     )
     return redirect('lista_cursos')
 
-def cuestionario_view(request):
-    preguntas = Pregunta.objects.all()
-    form = PreguntaForm(request.POST or None, preguntas=preguntas)
-
+def cuestionario_view(request, cuestionario_id):
+    cuestionario = get_object_or_404(Cuestionario, id=cuestionario_id)
     if request.method == 'POST':
+        form = CuestionarioForm(request.POST, cuestionario=cuestionario)
         if form.is_valid():
-            resultados = []
-            for pregunta in preguntas:
-                campo_nombre = f'pregunta_{pregunta.id}'
-                respuestas = form.cleaned_data.get(campo_nombre)
-                respuestas_correctas = pregunta.respuestas_lista()
-                if isinstance(respuestas, list):
-                    if set(respuestas) == set(respuestas_correctas):
-                        resultados.append((pregunta.pregunta_texto, "Correcto"))
-                    else:
-                        resultados.append((pregunta.pregunta_texto, "Incorrecto"))
-                else:
-                    if respuestas in respuestas_correctas:
-                        resultados.append((pregunta.pregunta_texto, "Correcto"))
-                    else:
-                        resultados.append((pregunta.pregunta_texto, "Incorrecto"))
-            return render(request, 'resultado.html', {'resultados': resultados})
+            respuestas_correctas = 0
+            total_preguntas = cuestionario.pregunta_set.count()
+
+            for pregunta in cuestionario.pregunta_set.all():
+                respuesta_usuario = form.cleaned_data.get(f'pregunta_{pregunta.id}')
+                respuestas_correctas += comprobar_respuesta(pregunta, respuesta_usuario)
+            
+            # Aquí puedes guardar el resultado o mostrarlo al usuario
+            return redirect('resultado', correctas=respuestas_correctas, total=total_preguntas)
+    else:
+        form = CuestionarioForm(cuestionario=cuestionario)
     
-    return render(request, 'cuestionario.html', {'form': form})
+    return render(request, 'cuestionario.html', {'form': form, 'cuestionario': cuestionario})
+
+def comprobar_respuesta(pregunta, respuesta_usuario):
+    respuestas_correctas = pregunta.respuestas_lista()
+    if isinstance(respuesta_usuario, list):
+        # Caso de checkbox (varias respuestas correctas)
+        return set(respuesta_usuario) == set(respuestas_correctas)
+    else:
+        # Caso de radio (una sola respuesta correcta)
+        return respuesta_usuario == respuestas_correctas[0]
+    
+
+def resultado_view(request, correctas, total):
+    return render(request, 'resultado.html', {
+        'correctas': correctas,
+        'total': total
+    })

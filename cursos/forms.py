@@ -1,29 +1,26 @@
+# forms.py
 from django import forms
-from .models import Pregunta
+from .models import Pregunta, Cuestionario
 
-class PreguntaForm(forms.Form):
+class CuestionarioForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        preguntas = kwargs.pop('preguntas', None)
-        super().__init__(*args, **kwargs)
+        cuestionario = kwargs.pop('cuestionario')
+        super(CuestionarioForm, self).__init__(*args, **kwargs)
+        preguntas = cuestionario.pregunta_set.all()
         
-        if preguntas:
-            for pregunta in preguntas:
-                opciones = pregunta.opciones_lista()
-                campo_nombre = f'pregunta_{pregunta.id}'
-                
-                if len(pregunta.respuestas_lista()) > 1:
-                    # Pregunta con múltiples respuestas (checkboxes)
-                    self.fields[campo_nombre] = forms.MultipleChoiceField(
-                        choices=[(opcion, opcion) for opcion in opciones],
-                        widget=forms.CheckboxSelectMultiple,
-                        label=pregunta.pregunta_texto,
-                        required=False
-                    )
-                else:
-                    # Pregunta con una sola respuesta (radio buttons)
-                    self.fields[campo_nombre] = forms.ChoiceField(
-                        choices=[(opcion, opcion) for opcion in opciones],
-                        widget=forms.RadioSelect,
-                        label=pregunta.pregunta_texto,
-                        required=False
-                    )
+        for pregunta in preguntas:
+            opciones = pregunta.opciones_lista()
+            if len(pregunta.respuestas_lista()) > 1:
+                self.fields[f'pregunta_{pregunta.id}'] = forms.MultipleChoiceField(
+                    choices=[(opcion, opcion) for opcion in opciones],
+                    widget=forms.CheckboxSelectMultiple,
+                    label=pregunta.pregunta_texto,
+                    required=True
+                )
+            else:
+                self.fields[f'pregunta_{pregunta.id}'] = forms.ChoiceField(
+                    choices=[(opcion, opcion) for opcion in opciones],
+                    widget=forms.RadioSelect,
+                    label=pregunta.pregunta_texto,
+                    required=True
+                )

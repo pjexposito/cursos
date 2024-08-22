@@ -96,9 +96,23 @@ class Pregunta(models.Model):
     pregunta_texto = models.CharField(max_length=255)
     opciones = models.CharField(max_length=255)  # Opciones separadas por |
     respuestas = models.CharField(max_length=255)  # Respuestas correctas separadas por |
-    
+    cuestionario = models.ForeignKey('Cuestionario', on_delete=models.CASCADE)
+
+
     def opciones_lista(self):
         return self.opciones.split('|')
     
     def respuestas_lista(self):
         return self.respuestas.split('|')
+    
+
+class Cuestionario(models.Model):
+    descripcion = models.CharField(max_length=255, default='Demuestra lo que sabes.')
+    curso = models.ForeignKey('Curso', on_delete=models.CASCADE)
+    fecha_creacion = models.DateField(default=timezone.now)
+    puntos = models.SmallIntegerField(default=150)
+    miniatura = models.ImageField(upload_to='images/miniaturas/')
+    #Posiblemente cambie la miniatura por un icono genérico.
+
+    def __str__(self):
+        return self.descripcion
