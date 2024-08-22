@@ -40,11 +40,13 @@ def lista_cursos(request):
 def detalle_curso(request, pk):
     curso = get_object_or_404(Curso, pk=pk)
     lecciones = Leccion.objects.filter(curso_id=pk)
+    cuestinarios = Cuestionario.objects.filter(curso_id=pk)
+
     lecciones_completadas = {}
     for leccion in lecciones:
         leccion_completada = UsuarioLeccion.objects.filter(usuario=request.user, leccion=leccion, completada=True).exists()
         lecciones_completadas[leccion.id] = leccion_completada
-    return render(request, 'cursos/detalle_curso.html', {'curso': curso, 'lecciones':lecciones, 'lecciones_completadas': lecciones_completadas})
+    return render(request, 'cursos/detalle_curso.html', {'curso': curso, 'lecciones':lecciones, 'lecciones_completadas': lecciones_completadas, 'cuestionarios': cuestinarios})
 
 def detalle_leccion(request, pk):
     leccion = get_object_or_404(Leccion, pk=pk)
@@ -78,7 +80,7 @@ def cuestionario_view(request, cuestionario_id):
     else:
         form = CuestionarioForm(cuestionario=cuestionario)
     
-    return render(request, 'cuestionario.html', {'form': form, 'cuestionario': cuestionario})
+    return render(request, 'cursos/cuestionario.html', {'form': form, 'cuestionario': cuestionario})
 
 def comprobar_respuesta(pregunta, respuesta_usuario):
     respuestas_correctas = pregunta.respuestas_lista()
@@ -91,7 +93,7 @@ def comprobar_respuesta(pregunta, respuesta_usuario):
     
 
 def resultado_view(request, correctas, total):
-    return render(request, 'resultado.html', {
+    return render(request, 'cursos/resultado.html', {
         'correctas': correctas,
         'total': total
     })

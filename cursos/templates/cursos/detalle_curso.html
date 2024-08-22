@@ -33,6 +33,26 @@
     </div>
     {% endfor %}
 
+    {% for cuestionario in cuestionarios %}
+
+    <div class="category-item">
+      <div class="category-image">
+          <img src="{{ cuestionario.miniatura.url }}" alt="imagen" />
+      </div>
+      <div class="category-content">
+          <h3><a href="{% url 'cuestionario' cuestionario_id=cuestionario.pk %}" title='{{cuestionario.descripcion}}'>{{cuestionario.descripcion}}</a></h3>
+          <div class="category-meta">
+              <span>
+                  <div class="lesson-subtext">🏅 Cuestionario completada</div>
+
+              </span>
+              <span>🕹️ {{ cuestionario.puntos }} puntos</span>
+          </div>
+      </div>
+
+  </div>
+  {% endfor %}
+
 
             </div>
         </section>

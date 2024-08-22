@@ -216,6 +216,29 @@ body {
     color: #d5d5d5; /* Color del texto en hover */
 }
 
+
+.cuestionario {
+    font-size: 16px; /* Tamaño de la fuente aumentado */
+    line-height: 1.4; /* Interlineado mejorado */
+    color: #2d2d2d; /* Color de texto gris oscuro */
+    padding: 10px; /* Espacio interno para separar el texto del borde */
+    margin: 0 auto; /* Centrado automático */
+    max-width: 360px; /* Ancho máximo reducido para mejor legibilidad */
+    background-color: #f3f2f2; /* Color de fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra similar a otros elementos */
+}
+.cuestionario p {
+    margin-bottom: 20px; /* Ajusta este valor según tus necesidades. Ahora es 20*/
+}
+
+.cuestionario h2 {
+    font-size: 24px; /* Tamaño de la fuente del título */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    color: #2d2d2d; /* Color del título */
+}
+
+
 .post {
     font-size: 16px; /* Tamaño de la fuente aumentado */
     line-height: 1.6; /* Interlineado mejorado */

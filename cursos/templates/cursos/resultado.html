@@ -1,0 +1,10 @@
+{% extends 'cursos/base.html' %}
+{% load custom_filters %}
+{% load static %}
+{% block content %}
+<div class="cuestionario">
+    <h1>Resultado del Cuestionario</h1>
+    <p>Respuestas correctas: {{ correctas }} de un total de {{ total }} preguntas.</p>
+</div>
+<br>
+{% endblock %}

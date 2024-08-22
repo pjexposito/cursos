@@ -1,0 +1,15 @@
+{% extends 'cursos/base.html' %}
+{% load custom_filters %}
+{% load static %}
+{% block content %}
+<div class="cuestionario">
+    <h1>{{ cuestionario.descripcion }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar Respuestas</button>
+    </form>
+
+</div>
+<br>
+{% endblock %}
