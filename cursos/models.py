@@ -44,6 +44,12 @@ class Curso(models.Model):
     fecha_creacion = models.DateField(default=timezone.now)
     puntos = models.SmallIntegerField()
     miniatura = models.ImageField(upload_to='images/miniaturas/')
+    OPCIONES = [
+        (1, 'Poco importante'),
+        (2, 'Interesante'),
+        (3, 'Fundamental'),
+    ]
+    importancia = models.PositiveIntegerField(choices=OPCIONES) #El valor de importancia, siendo 1 el valor más bajo, 2 el recomendado y tres el imprescindible
 
 
     def publicar(self):

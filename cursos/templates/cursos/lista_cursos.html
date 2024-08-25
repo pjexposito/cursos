@@ -8,7 +8,26 @@
     <div class="titulo">
         <h2><a href="/">Formación</a></h2>
     </div>
-    <div class="categories-grid">
+    <div class="cursos-importantes">
+    <h3>Cursos importantes pendientes</h3>
+    <div class="cursos-pendientes">
+
+    {% for curso in cursos_importantes_pendientes %}
+        <div class="curso-pendiente">
+            <img src="{{ curso.miniatura.url }}" class="background-image" alt="Imagen del curso">
+
+            <h4><a href="{% url 'detalle_curso' pk=curso.pk %}" title='{{ curso.explicacion|linebreaksbr }}'>{{ curso.titulo }}</a></h4>
+            <p>⏱️ {{curso.duracion}} min</p>
+        </div>
+       <p></p>
+    {% endfor %}
+</div>
+</div>
+<br>
+
+<h2>Catálogo formativo</h2>
+<br>
+<div class="categories-grid">
 
 {% for curso, total_lecciones, lecciones_completadas, total_puntos, total_puntos_obtenidos in lecciones_por_curso %}
 

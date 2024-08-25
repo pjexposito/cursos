@@ -7,6 +7,31 @@ from .forms import CuestionarioForm
 
 # Create your views here.
 
+
+def obtener_cursos_realizados(usuario):
+    # Obtener los cursos de las lecciones completadas por el usuario
+    cursos_realizados_ids = UsuarioLeccion.objects.filter(
+        usuario=usuario,
+        completada=True
+    ).values_list('leccion__curso_id', flat=True).distinct()
+
+    # Verificar que todas las lecciones de esos cursos han sido completadas
+    cursos_realizados = []
+    for curso_id in cursos_realizados_ids:
+        lecciones_del_curso = Leccion.objects.filter(curso_id=curso_id).count()
+        lecciones_completadas = UsuarioLeccion.objects.filter(
+            usuario=usuario,
+            leccion__curso_id=curso_id,
+            completada=True
+        ).count()
+
+        if lecciones_del_curso == lecciones_completadas:
+            cursos_realizados.append(Curso.objects.get(id=curso_id))
+
+    # Devolver los títulos de los cursos realizados
+    titulos_cursos = [curso.titulo for curso in cursos_realizados]
+    return titulos_cursos
+
 @login_required
 def lista_cursos(request):
     cursos = Curso.objects.filter(fecha_creacion__lte=timezone.now()).order_by('fecha_creacion')
@@ -30,12 +55,18 @@ def lista_cursos(request):
         # Agregar una tupla al resultado con el curso, número de lecciones totales y lecciones completadas
         lecciones_por_curso.append((curso, total_lecciones, lecciones_completadas,total_puntos_curso, total_puntos_completados))
         lecciones_por_curso.sort(key=lambda x: x[1] == x[2])  # Pone los completados al final
-        #Esta parte de arriba está hecha por ChatGPT. No entiendo como lo ha hecho. Investigar.
+    
+    
     # Calcular el total de lecciones de todos los cursos
     total_lecciones = sum(conteo for _, conteo, _, _, _ in lecciones_por_curso)
 
+    cursos_realizados = set(obtener_cursos_realizados(request.user))
 
-    return render(request, 'cursos/lista_cursos.html', {'lecciones_por_curso': lecciones_por_curso, 'total_lecciones': total_lecciones})
+    # Filtrar los cursos con importancia 3 que no han sido realizados por el usuario
+    cursos_importantes_pendientes = Curso.objects.filter(importancia=3).exclude(titulo__in=cursos_realizados).order_by('fecha_creacion')
+
+
+    return render(request, 'cursos/lista_cursos.html', {'lecciones_por_curso': lecciones_por_curso, 'total_lecciones': total_lecciones, 'cursos_importantes_pendientes': cursos_importantes_pendientes})
 
 def detalle_curso(request, pk):
     curso = get_object_or_404(Curso, pk=pk)
