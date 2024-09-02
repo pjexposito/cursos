@@ -6,6 +6,12 @@ from django.contrib.auth.models import User
 from .utils import transformar_texto_oculto
 import markdown2
 
+class Categoria(models.Model):
+    titulo = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.titulo
+
 class Leccion(models.Model):
     titulo = models.CharField(max_length=100)
     explicacion = models.CharField(max_length=400)
@@ -37,6 +43,7 @@ class Leccion(models.Model):
         return self.titulo
     
 class Curso(models.Model):
+    categoria = models.ForeignKey('Categoria', on_delete=models.CASCADE)
     titulo = models.CharField(max_length=100)
     explicacion = models.CharField(max_length=400)
     miniexplicacion = models.TextField()

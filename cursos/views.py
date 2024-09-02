@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Curso, Leccion, UsuarioLeccion, Cuestionario
+from .models import Curso, Leccion, UsuarioLeccion, Cuestionario, Categoria
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum  
 from .forms import CuestionarioForm
@@ -32,6 +32,7 @@ def obtener_cursos_realizados(usuario):
     titulos_cursos = [curso.titulo for curso in cursos_realizados]
     return titulos_cursos
 
+'''
 @login_required
 def lista_cursos(request):
     cursos = Curso.objects.filter(fecha_creacion__lte=timezone.now()).order_by('fecha_creacion')
@@ -67,6 +68,42 @@ def lista_cursos(request):
 
 
     return render(request, 'cursos/lista_cursos.html', {'lecciones_por_curso': lecciones_por_curso, 'total_lecciones': total_lecciones, 'cursos_importantes_pendientes': cursos_importantes_pendientes})
+
+'''
+
+@login_required
+def lista_cursos(request):
+    cursos = Curso.objects.filter(fecha_creacion__lte=timezone.now()).order_by('fecha_creacion')
+    lecciones_por_categoria = {}
+    
+    for curso in cursos:
+        total_lecciones = curso.leccion_set.count()
+        lecciones_completadas = UsuarioLeccion.objects.filter(usuario=request.user, leccion__curso=curso, completada=True).count()
+
+        lecciones_completadas_para_puntos = UsuarioLeccion.objects.filter(usuario=request.user, leccion__curso=curso, completada=True)
+        total_puntos_completados = lecciones_completadas_para_puntos.aggregate(total_puntos_completados=Sum('puntos_obtenidos'))['total_puntos_completados'] or 0
+
+        lecciones_para_puntos = curso.leccion_set.all()
+        total_puntos_curso = lecciones_para_puntos.aggregate(total_puntos_curso=Sum('puntos'))['total_puntos_curso'] or 0
+
+        categoria = curso.categoria
+        leccion_info = (curso, total_lecciones, lecciones_completadas, total_puntos_curso, total_puntos_completados)
+
+        if categoria not in lecciones_por_categoria:
+            lecciones_por_categoria[categoria] = []
+
+        lecciones_por_categoria[categoria].append(leccion_info)
+        
+        # Ordenar los cursos en cada categoría: los completados al final
+        lecciones_por_categoria[categoria].sort(key=lambda x: x[1] == x[2])
+
+    cursos_realizados = set(obtener_cursos_realizados(request.user))
+    cursos_importantes_pendientes = Curso.objects.filter(importancia=3).exclude(titulo__in=cursos_realizados).order_by('fecha_creacion')
+
+    return render(request, 'cursos/lista_cursos.html', {'lecciones_por_categoria': lecciones_por_categoria, 'cursos_importantes_pendientes': cursos_importantes_pendientes})
+
+
+    
 
 def detalle_curso(request, pk):
     curso = get_object_or_404(Curso, pk=pk)

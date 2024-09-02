@@ -554,3 +554,15 @@ body {
     position: relative; /* Asegura que el texto esté por encima de la imagen */
     z-index: 1;
 }
+
+
+.category-title {
+    cursor: pointer;
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.category-content {
+    padding-left: 15px;
+}
